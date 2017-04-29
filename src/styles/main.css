@@ -1,4 +1,38 @@
 
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
 body {
-	color: green;
+	padding: 40px;
+}
+
+.card {
+	text-align: center;
+	background-color: grey;
+	width: 800px;
+	height: 600px;
+	margin: 0 auto;
+	/*padding-top: 10px;*/
+}
+
+.chart {
+	/*border: 1px solid red;*/
+}
+
+.toolTip {
+  position: absolute;
+  text-align: left;
+  width: auto;
+  height: auto;
+  padding: 3px 5px 3px 5px;
+  font: 1em sans-serif;
+  border: 0px;
+  border-radius: 5px;
+  pointer-events: none;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+  background-color: lightsteelblue;
+  opacity: 0;
 }

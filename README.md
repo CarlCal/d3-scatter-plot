@@ -1,1 +1,1 @@
-The freecodecamp d3 scatter-plot excersise 
+The freecodecamp d3 scatter-plot challange

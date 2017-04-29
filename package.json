@@ -11,6 +11,7 @@
   "author": "Carl Callmer",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.16.1",
     "d3": "^4.8.0"
   },
   "devDependencies": {
