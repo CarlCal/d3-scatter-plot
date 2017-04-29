@@ -15,7 +15,7 @@ axios.get(URL)
 		var notAllegedColor = "#0c9100"
 
 		var chart = d3.select(".chart"),
-        margin = {top: 5, right: 140, bottom: 70, left: 70},
+        margin = {top: 25, right: 140, bottom: 70, left: 70},
         width = 800 - margin.left - margin.right,
         height = 600 - margin.top - margin.bottom
 
@@ -23,7 +23,6 @@ axios.get(URL)
     var rankOneSec = d3.min(data, function(d) { return d.Seconds })
     data.forEach((element) => {
     	element.Behind = element.Seconds - rankOneSec
-    	element.Legend = (element.Doping !== "") ? true : false 
     })
 
     var x = d3.scaleLinear().range([0, width])
@@ -76,25 +75,75 @@ axios.get(URL)
      		.data(data)
      	.enter().append("circle")
      		.attr("class", "dot")
-     		.attr("r", 5)
+     		.attr("r", 6)
      		.attr("cx", function(d) { return (x(d.Behind) + 15) })
      		.attr("cy", function(d) { return y(d.Place) })
+     		.style("cursor", "pointer")
      		.style("fill", function(d) {
      			if (d.Doping) { return allegedColor }
      			else { return notAllegedColor }
      		})
      		.on("mouseover", function(d) {
-          var date = new Date(d.date)
-          var year = date.getFullYear()
-          var month = date.getMonth()
 
-          tooltip.html(`<span class='amount'>${formatCurrency(d.value)} Billion </span><br><span class='year'> ${year} - ${months[month]} </span>`)
+     			var timeArr = d.Time.split(':')
+
+          tooltip.html(`
+          		<div>
+          		${d.Name}, ${d.Nationality}<br>
+          		Finished ${d.Place} in ${d.Year}<br>
+          		${timeArr[0]} minutes, ${timeArr[1]} seconds
+          		</div>
+          		<div class="tip-note">${d.Doping}</div>
+          	`)
             .style("opacity", "0.9")
-            .style("left", d3.event.pageX + 5 + "px")
-            .style("top", d3.event.pageY - 50 + "px")
+            .style("left", d3.event.pageX + "px")
+            .style("top", d3.event.pageY + "px")
 
-         })
-         .on("mouseout", function() { tooltip.style("opacity", "0") });
+        })
+        .on("mouseout", function() { tooltip.style("opacity", "0") })
+
+   	g.selectAll("p")
+   			.data(data)
+   		.enter().append("text")
+   			.attr("x", function(d) { return (x(d.Behind) + 25) })
+				.attr("y", function(d) { return y(d.Place) })
+	    	.attr("dy", "0.50em")
+	    	.attr("text-anchor", "start")
+	      .attr("fill", "black")
+	      .style("font-size", "14px")
+	      .text(function(d) { return d.Name })
+
+
+	  g.append("circle")  
+	  		.attr("r", 7)
+     		.attr("cx", "500px")
+     		.attr("cy", "280px")
+     		.attr("fill", allegedColor)
+
+	  g.append("text")
+		    .attr("x", 515)
+		    .attr("y", 280)
+		    .attr("dy", ".35em")
+		    .style("text-anchor", "start")
+		    .style("font-size", "14px")
+		    .style("font-style", "italic")
+		    .text("Riders with doping allegations");
+
+
+		g.append("circle")  
+	  		.attr("r", 7)
+     		.attr("cx", "500px")
+     		.attr("cy", "310px")
+     		.attr("fill", notAllegedColor)
+
+	  g.append("text")
+		    .attr("x", 515)
+		    .attr("y", 310)
+		    .attr("dy", ".35em")
+		    .style("text-anchor", "start")
+		    .style("font-size", "14px")
+		    .style("font-style", "italic")
+		    .text("No doping allegations");
 
 	})
 	.catch(function (error) {

@@ -6,13 +6,21 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
-		<section class="card">
-<!-- 			<h1>Doping in Professional Bicycle Racing</h1>
-			<h2>35 Fastest times up Alpe d`Huez</h2>
-			<p>Normalized to 13.8km distance</p> -->
-			<svg class="chart" width="800" height="600"></svg>
-		</section>
-		<div class="notes"></div>
-    <div id="app"></div>
+  	<main>
+			<section class="card">
+	 			<h1>Doping in Professional Bicycle Racing</h1>
+				<h2>35 Fastest times up Alpe d`Huez</h2>
+				<p><em>(Hover over a dot for additional information)</em></p> 
+				<svg class="chart" width="800" height="600"></svg>
+			</section>
+			<footer class="notes">
+				<p>Sources:</p>
+				<a href="https://en.wikipedia.org/wiki/Alpe_d%27Huez" target="_blank">Wiki</a>
+				<a href="http://www.fillarifoorumi.fi/forum/showthread.php?38129-Ammattilaispy%F6r%E4ilij%F6iden-nousutietoja-%28aika-km-h-VAM-W-W-kg-etc-%29&p=2041608#post2041608" target="_blank">Fillarifoorumi</a>
+				<a href="https://alex-cycle.blogspot.com/2015/07/alpe-dhuez-tdf-fastest-ascent-times.html" target="_blank">alex-cycle.blogspot</a>
+				<a href="http://www.dopeology.org/" target="_blank">Dopeology</a>
+			</footer>
+	    <div id="app"></div>
+    </main>
   </body>
 </html>
